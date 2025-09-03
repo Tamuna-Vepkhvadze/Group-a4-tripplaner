@@ -6,6 +6,7 @@ export interface Card {
   title: string;
   description: string;
 }
+
 const DiscoverCountries = () => {
  const cards: Card[] = [
     {
