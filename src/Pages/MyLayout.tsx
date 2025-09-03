@@ -6,9 +6,9 @@ const MyLayout = () => {
     <main className="min-h-screen bg-gray-50">
       <Header />
 
-      <div className="pt-8">
+ 
         <Outlet />
-      </div>
+     
     </main>
   );
 };

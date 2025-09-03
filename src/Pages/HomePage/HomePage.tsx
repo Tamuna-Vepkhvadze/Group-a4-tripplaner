@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom"
+
+import DiscoverCountries from "./DiscoverCountries"
+import PlanAdventure from "./PlanAdventure"
+import PlanYourTrip from "./PlanYourTrip"
 
 
 const HomePage = () => {
   return (
-    <>
-            <Link to={"/ExplorePlaces"} className="bg-blue-500 text-white px-15 py-2 rounded hover:bg-blue-600 transition">
-            Explore Places
-            </Link>
-                <Link to={""} className="bg-blue-500 text-white px-15 py-2 rounded hover:bg-blue-600 transition">
-            Learn More
-            </Link>
-     </>
+    <main className="bg-blue-50 min-h-screen">
+          <PlanAdventure/>
+          <DiscoverCountries/>
+          <PlanYourTrip/>
+
+   </main>
   )
 
 }
