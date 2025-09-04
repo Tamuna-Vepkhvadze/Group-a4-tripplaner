@@ -1,5 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import React from 'react'
+import type { CountryType } from '../../Pages/ExplorePlaces/Interface';
+import AddData from './AddData';
 
 interface SideBarProps{
   onClick: ()=> void,
@@ -12,6 +14,14 @@ const SideBar:React.FC<SideBarProps> = ({onClick, isOpen}) => {
 const {setNodeRef, isOver} = useDroppable({
   id:'drop-zone'
 })
+
+
+const LocalData = localStorage.getItem("storage");
+const data: CountryType[] = LocalData ? JSON.parse(LocalData) as CountryType[] : [];
+
+
+
+
 
   return (
     <div className="inset-y-0 right-0 flex max-w-full pointer-events-none absolute">
@@ -53,12 +63,15 @@ const {setNodeRef, isOver} = useDroppable({
           <div className="flex-1 overflow-y-auto">
             <div className="px-4 py-6 sm:px-6">
               {/* Current Trip */}
-              <div
+
+              {
+                data ? (<AddData data={data}/>) : 
+                (  <div
                 ref={setNodeRef}
                 className={`mb-8 min-h-[200px] border-2 border-dashed rounded-lg p-4 transition-colors duration-200 ${
                   isOver ? "border-blue-600 bg-blue-100" : "border-blue-300 bg-blue-50"
                 }`}
-              >
+                >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-medium text-gray-900">Current Trip</h3>
                 </div>
@@ -83,7 +96,10 @@ const {setNodeRef, isOver} = useDroppable({
                   <p className="font-medium">Drop countries here</p>
                   <p className="text-sm">Drag countries from the list to add them to your trip</p>
                 </div>
-              </div>
+              </div>)
+              }
+
+            
 
               {/* Saved Trips */}
               <div>

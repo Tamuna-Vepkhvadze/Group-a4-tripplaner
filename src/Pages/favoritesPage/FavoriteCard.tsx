@@ -1,16 +1,15 @@
 import React from 'react'
-import type { CountryType } from './Interface'
-import { Ardlocation, Capital, People } from '../HomePage/Icons'
 import AddFavoritePage from '../../components/dndKit/AddFavoritePage'
-
+import { Ardlocation, Capital, People } from '../HomePage/Icons'
+import type { fatchData } from '../ExplorePlaces/Interface'
 interface cardsProp {
-    data:CountryType[] | undefined
+    data:fatchData[] | undefined
 }
 
 
-const Cards:React.FC<cardsProp> = ({data}) => {
-    
-    const formatPopulation = (population: number) :string=> {
+const FavoriteCard:React.FC<cardsProp> = ({data}) => {
+
+     const formatPopulation = (population: number) :string=> {
         if(population >= 1000000) {
             return (population / 1000000).toFixed(1) + "M"
         } else if (population >= 1000) {
@@ -20,7 +19,7 @@ const Cards:React.FC<cardsProp> = ({data}) => {
     }
 
   return (
-    <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+     <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
         {data?.map((card, ind) => (
             <div
             key={ind}
@@ -51,24 +50,4 @@ const Cards:React.FC<cardsProp> = ({data}) => {
   )
 }
 
-
-
-
-              // const Cards:React.FC<cardsProp> = ({data}) => {
-
-              //   return (
-              //     <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-              //         {data?.map((card) => (
-              //             <DragableCard key={card.name.common} card={card} />
-              //         ))}
-              //     </section>
-
-
-
-
-
-
-              //   )
-              // }
-
-export default Cards
+export default FavoriteCard

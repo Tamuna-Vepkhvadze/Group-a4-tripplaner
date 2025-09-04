@@ -29,4 +29,14 @@ export interface CountryType {
     region: string;
     subregion: string;
 }
+export interface rowData {
+    id:string,
+    data:CountryType,
+    resource: string,
+    updatedAt:string,
+    createdAt: string,
+}
 
+export interface fatchData extends CountryType{
+    id:string,
+}
