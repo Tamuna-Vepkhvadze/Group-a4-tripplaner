@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import { Filter, SerchBar } from '../HomePage/Icons'
-import type { CountryType } from './interface'
+import type { CountryType } from './Interface'
 import Cards from './cards'
 
 interface serchProp {
