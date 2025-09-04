@@ -1,8 +1,9 @@
 
 import { useState } from 'react'
-import { Filter, SerchBar } from '../HomePage/Icons'
+import { Filter, Heart, SerchBar } from '../HomePage/Icons'
 import type { CountryType } from './Interface'
 import Cards from './cards'
+import { Link } from 'react-router-dom'
 
 interface serchProp {
     data:CountryType[] | undefined
@@ -59,7 +60,8 @@ const filterData = data?.filter(name =>{
             
                 <label className="flex items-center gap-2 text-gray-700">
                     <input type="checkbox" className="w-4 h-4 text-blue-600 rounded border-gray-300" />
-                    Show favorites only
+                   <Heart/>
+                    <Link to={"/PavoritesPage"} >Show favorites only</Link>
                 </label>
 
         </div>

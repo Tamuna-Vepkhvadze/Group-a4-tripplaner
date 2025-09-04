@@ -1,7 +1,8 @@
 import React from 'react'
 import type { CountryType } from '../../Pages/ExplorePlaces/Interface'
 import { useDraggable } from '@dnd-kit/core'
-import { Ardlocation, Capital, People } from '../../Pages/HomePage/Icons'
+import { Ardlocation, Capital,  People } from '../../Pages/HomePage/Icons'
+import AddFavoritePage from './AddFavoritePage'
 
 
 
@@ -36,7 +37,8 @@ const formatPopulation = (population: number) :string=> {
 
   return (
     <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-        <div className="w-full aspect-[4/3] max-h-40">
+        <div className="w-full aspect-[4/3] max-h-40 relative">
+      
         <img src={card.flags.png} alt="Country_Flags" className="w-full h-full object-cover" />
       </div>
       <div className="h-1/2 p-4 flex flex-col justify-between">
