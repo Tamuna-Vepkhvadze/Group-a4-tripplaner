@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { fatchCountry } from "../services/reactquerys/query/fatchCountry"
-import type { CountryType } from "../Pages/ExplorePlaces/interface"
+import type { CountryType } from "../Pages/ExplorePlaces/Interface"
+
 
 export const useFatchCountry = () => {
     const result = useQuery<CountryType[]>({

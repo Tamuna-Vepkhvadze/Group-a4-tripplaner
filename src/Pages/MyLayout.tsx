@@ -1,26 +1,65 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
 import { useState } from "react";
 import SideBar from "../components/sideBar/SideBar";
+import { DndContext, type DragEndEvent } from "@dnd-kit/core";
+import { usePostCountry } from "../hooks/usePostCountry";
+import { useFatchCountry } from "../hooks/useFatchCountry";
 
 
 const MyLayout = () => {
 
+  const {mutate:postCountry} = usePostCountry()
+  const { data } = useFatchCountry();
+
   //State for Modal
   const [modalOpen, setModalOpen]= useState(false)
-  //function for modal opening
-    const openPop_up = ()=> {
-      console.log('It\'s open')
-      setModalOpen(true)
-    }
+  const location = useLocation()
+  const navigate = useNavigate()
   
+  //function to open modal
+    const openPop_up = ()=> {
+     if(location.pathname==='/ExplorePlaces'){
+       setModalOpen(true)
+     } else {
+      navigate('/ExplorePlaces')
+     }
+    }
+
+  //function to close modal
+  const closePop_up = () => {
+    setModalOpen(false)
+  }
+
+  //DragFunction
+    const handleDrag = (event:DragEndEvent)=> {
+      const {active, over } = event
+      console.log('Dragged item:', active.id)
+      console.log('Dropped over:', over?.id)
+
+      if(over?.id === 'drop-zone'){
+        const country = data?.find(country =>country.name.common === active.id)
+        if(country){
+          postCountry(country)
+          
+        }
+      }
+    }
+
+
+
 
   return (
     <main className="min-h-screen bg-gray-50">
       <Header openModal={openPop_up} />
-      {modalOpen? <SideBar /> : null}
-        <Outlet />
-     
+      <DndContext onDragEnd={handleDrag}>
+      <div className="flex">
+        {modalOpen && <SideBar onClick={closePop_up} isOpen={modalOpen}/>}
+        <div  className={`flex-1 transition-all duration-300 ${modalOpen ? "mr-80" : "mr-0"}`}>
+          <Outlet />
+        </div>
+      </div>
+      </DndContext>
     </main>
   );
 };

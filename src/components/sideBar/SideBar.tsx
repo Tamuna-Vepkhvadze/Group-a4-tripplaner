@@ -1,15 +1,31 @@
+import { useDroppable } from '@dnd-kit/core';
 import React from 'react'
 
-const SideBar = () => {
+interface SideBarProps{
+  onClick: ()=> void,
+  isOpen: boolean;
+
+}
+
+const SideBar:React.FC<SideBarProps> = ({onClick, isOpen}) => {
+//import droppable hook
+const {setNodeRef, isOver} = useDroppable({
+  id:'drop-zone'
+})
+
   return (
-    <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 z-50">
-      <div className="pointer-events-auto w-screen max-w-md">
+    <div className="inset-y-0 right-0 flex max-w-full pointer-events-none absolute">
+      <div className={`pointer-events-auto w-80 transition-transform duration-300 transform ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}>
         <div className="flex h-full flex-col bg-white shadow-xl">
           {/* Header */}
           <div className="bg-blue-600 px-4 py-6 sm:px-6">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-medium text-white">Trip Planner</h2>
-              <button className="rounded-md text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+              <button className="rounded-md text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+              onClick={onClick}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -37,10 +53,16 @@ const SideBar = () => {
           <div className="flex-1 overflow-y-auto">
             <div className="px-4 py-6 sm:px-6">
               {/* Current Trip */}
-              <div className="mb-8 min-h-[200px] border-2 border-dashed rounded-lg p-4 transition-colors duration-200 border-blue-300 bg-blue-50">
+              <div
+                ref={setNodeRef}
+                className={`mb-8 min-h-[200px] border-2 border-dashed rounded-lg p-4 transition-colors duration-200 ${
+                  isOver ? "border-blue-600 bg-blue-100" : "border-blue-300 bg-blue-50"
+                }`}
+              >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-medium text-gray-900">Current Trip</h3>
                 </div>
+
                 <div className="text-center py-8 text-gray-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
