@@ -1,6 +1,7 @@
 import HeaderLogo from './HeaderLogo';
 import HeaderButton from './HeaderButton';
 
+
 interface HeaderProps {
   openModal:()=> void
 }

@@ -1,6 +1,10 @@
 import React from 'react'
 
-const SideBar = () => {
+interface SideBarProps{
+  onClick: ()=> void
+}
+
+const SideBar:React.FC<SideBarProps> = ({onClick}) => {
   return (
     <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 z-50">
       <div className="pointer-events-auto w-screen max-w-md">
@@ -9,7 +13,9 @@ const SideBar = () => {
           <div className="bg-blue-600 px-4 py-6 sm:px-6">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-medium text-white">Trip Planner</h2>
-              <button className="rounded-md text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+              <button className="rounded-md text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+              onClick={onClick}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
