@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import type { CountryType } from "../../Pages/ExplorePlaces/Interface";
 import { GripVertical, Trash2 } from "lucide-react";
 import { useTripStore } from "../../ZustandStore/CurrentTripList.store";

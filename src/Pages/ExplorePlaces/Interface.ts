@@ -41,3 +41,23 @@ export interface rowData {
 export interface fatchData extends CountryType{
     id:string,
 }
+
+export interface sentDataType {
+    cardsname:string,
+    cardData:CountryType[]
+}
+
+export interface DataType {
+  id: string;
+  resource: string;
+  time: string;
+  cardsname: string;
+  cardData: CountryType[];
+}
+export interface countryrowdata {
+    id:string,
+    data:sentDataType,
+    resource: string,
+    updatedAt:string,
+    createdAt: string,
+}

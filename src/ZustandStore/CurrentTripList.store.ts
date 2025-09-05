@@ -40,3 +40,5 @@ export const useTripStore = create<TripState>((set) => ({
       return { tripCountries: [] };
     }),
 }));
+
+

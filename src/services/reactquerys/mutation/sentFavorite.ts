@@ -3,7 +3,7 @@ import { serwercall } from "../../axios/Axioswrapper"
 
 
 const sentFavorite =async(resource:string, senddata:CountryType) => {
- const responce = await serwercall.post(resource, {data:[senddata]})
+ const responce = await serwercall.post(`resource/${resource}`, {data:[senddata]})
 
  return responce.data
 }

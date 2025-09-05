@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDroppable } from '@dnd-kit/core';
 
 import TripCountryItem from './TripCountry_ListItem';
 import { useTripStore } from '../../ZustandStore/CurrentTripList.store';
+import AddData from './AddData';
 
 
 
@@ -10,8 +11,10 @@ const CurrentTrip:React.FC = () => {
     const {setNodeRef, isOver} = useDroppable({ id: 'drop-zone' });
     const { tripCountries, clearAll } = useTripStore();
 
+    const [changebutton, setchangebutton] =useState(false)
 
   return (
+    <>
    <div
       ref={setNodeRef}
       className={`mb-8 min-h-[200px] border-2 border-dashed rounded-lg p-4 transition-colors duration-200 ${
@@ -45,7 +48,26 @@ const CurrentTrip:React.FC = () => {
           <p className="text-sm">Drag countries from the list to add them to your trip</p>
         </div>
       )}
+           
     </div>
+
+
+    {
+      changebutton ? (
+        <AddData changebutton={setchangebutton}/>
+      ): (
+               <button
+                    onClick={() => setchangebutton(true)}
+                    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 flex items-center justify-center gap-2 w-full my-10"
+                >
+                   
+                    Save Trip
+                </button>
+      )
+    }
+             
+
+   </>
   )
 }
 
