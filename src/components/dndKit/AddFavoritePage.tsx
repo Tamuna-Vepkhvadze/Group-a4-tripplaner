@@ -17,7 +17,8 @@ const AddFavoritePage:React.FC<prop> = ({data}) => {
   alert("sucsess")
   }
 
-const getLocal = () => {
+const getLocal = (e:React.MouseEvent<HTMLButtonElement>) => {
+e.stopPropagation()
   try {
     const locData =[data] 
     const storageData = JSON.stringify(locData)

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { CountryType } from './Interface'
 import { Ardlocation, Capital, People } from '../HomePage/Icons'
 import AddFavoritePage from '../../components/dndKit/AddFavoritePage'
+import CountryModal from '../../components/cardPopUp/CountryModal'
+import { useSidebarStore } from '../../ZustandStore/SideBar.store'
+
 
 interface cardsProp {
     data:CountryType[] | undefined
@@ -9,6 +12,11 @@ interface cardsProp {
 
 
 const Cards:React.FC<cardsProp> = ({data}) => {
+
+    //State for pop-up
+    const[selectedCard, setSelectedCard]= useState<CountryType | null>(null)
+    const modalOpen = useSidebarStore((state) => state.modalOpen);
+
     
     const formatPopulation = (population: number) :string=> {
         if(population >= 1000000) {
@@ -20,13 +28,16 @@ const Cards:React.FC<cardsProp> = ({data}) => {
     }
 
   return (
-    <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+    <section  className={`mx-auto grid gap-6 p-4 sm:p-6  grid-cols-1 
+        sm:grid-cols-2 md:grid-cols-3 transition-all duration-300 ${modalOpen ? "lg:grid-cols-3 max-w-[900px]" : "lg:grid-cols-4 max-w-[1200px]"} `}>
         {data?.map((card, ind) => (
             <div
             key={ind}
-            className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
+             className={`overflow-hidden bg-white rounded-lg shadow-md flex flex-col cursor-pointeroverflow-hidden transform transition-all duration-300${modalOpen ? "scale-95 max-h-[12rem]" : "scale-100 max-h-[40rem]"}`}
+            onClick={()=>setSelectedCard(card)}
             >
-                <div className="w-full aspect-[4/3] max-h-40 relative">
+                <div className={`w-full relative 
+                    ${modalOpen ? "max-h-24" : "max-h-40"} aspect-[4/3]`}>
                 <AddFavoritePage data={card}/>
                     <img
                     src={card.flags.png}
@@ -46,7 +57,9 @@ const Cards:React.FC<cardsProp> = ({data}) => {
                     {card.continents[0]}
                 </p>
             </div>
+           
         ))}
+        {selectedCard && <CountryModal isOpen={!!selectedCard} onClose={()=>setSelectedCard(null)}  country={selectedCard}/>}
     </section>
   )
 }

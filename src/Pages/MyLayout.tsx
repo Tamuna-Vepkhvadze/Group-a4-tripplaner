@@ -1,10 +1,11 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
-import { useState } from "react";
+
 import SideBar from "../components/sideBar/SideBar";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import { usePostCountry } from "../hooks/usePostCountry";
 import { useFatchCountry } from "../hooks/useFatchCountry";
+import { useSidebarStore } from "../ZustandStore/SideBar.store";
 
 
 const MyLayout = () => {
@@ -13,7 +14,7 @@ const MyLayout = () => {
   const { data } = useFatchCountry();
 
   //State for Modal
-  const [modalOpen, setModalOpen]= useState(false)
+  const {modalOpen,setModalOpen} =useSidebarStore()
   const location = useLocation()
   const navigate = useNavigate()
   

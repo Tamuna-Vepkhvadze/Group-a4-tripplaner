@@ -29,6 +29,7 @@ export interface CountryType {
     region: string;
     subregion: string;
 }
+
 export interface rowData {
     id:string,
     data:CountryType,
