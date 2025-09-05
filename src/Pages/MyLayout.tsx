@@ -1,11 +1,10 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
-
-import SideBar from "../components/sideBar/SideBar";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import { usePostCountry } from "../hooks/usePostCountry";
 import { useFatchCountry } from "../hooks/useFatchCountry";
 import { useSidebarStore } from "../ZustandStore/SideBar.store";
+import Side_Bar from "../components/sideBar/Side_Bar";
 
 
 const MyLayout = () => {
@@ -47,15 +46,12 @@ const MyLayout = () => {
       }
     }
 
-
-
-
   return (
     <main className="min-h-screen bg-gray-50">
       <Header openModal={openPop_up} />
       <DndContext onDragEnd={handleDrag}>
       <div className="flex">
-        {modalOpen && <SideBar onClick={closePop_up} isOpen={modalOpen}/>}
+        {modalOpen && <Side_Bar onClick={closePop_up} isOpen={modalOpen}/>}
         <div  className={`flex-1 transition-all duration-300 ${modalOpen ? "mr-80" : "mr-0"}`}>
           <Outlet />
         </div>
