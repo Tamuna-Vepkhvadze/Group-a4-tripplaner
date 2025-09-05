@@ -2,6 +2,7 @@
 import usePostFaworite from '../../hooks/usePostFaworite'
 import type { CountryType } from '../../Pages/ExplorePlaces/Interface'
 import { Card_icon_1, Card_icon_2 } from '../../Pages/HomePage/Icons'
+import { useTripStore } from '../../ZustandStore/CurrentTripList.store'
 
 interface prop {
   data:CountryType
@@ -10,6 +11,8 @@ interface prop {
 const AddFavoritePage:React.FC<prop> = ({data}) => {
 
   const {mutate} = usePostFaworite("FavoriteResource")
+  const { addCountry } = useTripStore();
+
 
   const metodpost =(e:React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
@@ -17,18 +20,10 @@ const AddFavoritePage:React.FC<prop> = ({data}) => {
   alert("sucsess")
   }
 
-const getLocal = (e:React.MouseEvent<HTMLButtonElement>) => {
-e.stopPropagation()
-  try {
-    const locData =[data] 
-    const storageData = JSON.stringify(locData)
-    localStorage.setItem("storage",storageData )
-    
-  } catch (error) {
-    console.log("error")
-    
-  }
-}
+  const handleAddToTrip = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      addCountry(data);
+    };
 
 
   return (
@@ -38,7 +33,7 @@ e.stopPropagation()
         </button>
 
 
-        <button onClick={getLocal} className='cursor-pointer'>
+        <button onClick={handleAddToTrip} className='cursor-pointer'>
           <Card_icon_2/>
         </button>
 
