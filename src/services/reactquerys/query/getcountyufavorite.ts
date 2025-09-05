@@ -1,10 +1,10 @@
 import { serwercall } from "../../axios/Axioswrapper"
 
 
-const getfavorite =async(resource:string) => {
+const getcountyufavorite =async(resource:string) => {
     const result = await serwercall.get(`resource/${resource}`)
 return result.data
 }
 
 
-export default getfavorite
+export default getcountyufavorite

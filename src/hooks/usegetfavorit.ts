@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import getfavorite from "../services/reactquerys/query/getfavorite"
-import type { CountryType, rowData } from "../Pages/ExplorePlaces/Interface"
+import type {  rowData } from "../Pages/ExplorePlaces/Interface"
 
 
 const usegetfavorit = (resource:string) => {

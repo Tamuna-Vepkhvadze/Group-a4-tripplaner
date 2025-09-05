@@ -13,15 +13,17 @@ const PlanAdventure = () => {
           Your next adventure is just a click away.
         </p>
         <div className="mt-6 flex justify-center gap-4">
-          <Link
+         <Link
             to="/ExplorePlaces"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold  hover:bg-blue-700 transform transition 
+           hover:-translate-y-1"
           >
             Explore Places
           </Link>
           <Link
             to="/"
-            className="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition"
+            className="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold  hover:bg-blue-600 hover:text-white transition"
+          
           >
             Learn More
           </Link>
