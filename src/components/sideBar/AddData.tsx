@@ -19,8 +19,6 @@ const AddData: React.FC<prop> = ({data}) => {
                             <h2>{itrm.name.common}</h2>
                             <p>{itrm.continents[0]}</p>
                         </div>
-
-                        
                     </div>
             )
         }

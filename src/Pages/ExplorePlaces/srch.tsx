@@ -64,12 +64,11 @@ const filterData = data?.filter(name =>{
                     <Link to={"/PavoritesPage"} >Show favorites only</Link>
                 </label>
 
-        </div>
-        
+         </div>
                 <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center  pl-4 pb-4 text-gray-500">
                      Showing {filterData?.length || 0} of {data?.length || 0} countries
                 </div>
-    </div>
+      </div>
 
 
 
