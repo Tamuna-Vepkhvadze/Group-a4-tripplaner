@@ -13,4 +13,5 @@ const useDelete = (resource: string ) => {
   })
   return result
 }
+
 export default useDelete
