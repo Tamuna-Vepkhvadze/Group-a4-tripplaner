@@ -2,7 +2,7 @@ import React from 'react'
 import CurrentTrip from './CurrentTrip';
 import SavedTrips from './SavedTrips';
 import SideBarHeader from './SideBarHeader';
-import useFcounrty from '../../hooks/useFcounrty';
+
 
 
 interface SideBarProps {
@@ -14,7 +14,7 @@ const Side_Bar:React.FC<SideBarProps> = ({isOpen,onClick}) => {
 
   return (
     
-      <div className="inset-y-0 right-0 flex max-w-full pointer-events-none absolute">
+      <div className="inset-y-0 right-0 flex max-w-full pointer-events-none absolute z-50">
       <div
         className={`pointer-events-auto w-120 transition-transform duration-300 transform ${
           isOpen ? 'translate-x-0' : 'translate-x-full'

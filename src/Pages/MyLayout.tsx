@@ -54,9 +54,13 @@ closePop_up()
     <main className="min-h-screen bg-gray-50">
       <Header openModal={openPop_up} />
       <DndContext onDragEnd={handleDrag}>
-      <div className="flex">
-        {modalOpen && <Side_Bar onClick={closePop_up} isOpen={modalOpen}/>}
-        <div onClick={stoppropagation}  className={`flex-1 transition-all duration-300 ${modalOpen ? "mr-80" : "mr-0"}`}>
+      <div  className={`flex-1 transition-all duration-300 pr-4 ${
+      modalOpen ? 'md:mr-80 sm:mr-64' : 'mr-0'
+    }`}>
+        {modalOpen && ( <div className="w-80 flex-shrink-0" >
+          <Side_Bar onClick={closePop_up} isOpen={modalOpen} />
+        </div>)}
+        <div onClick={stoppropagation}  className={`flex-1 transition-all duration-300`}>
           <Outlet />
         </div>
       </div>

@@ -27,9 +27,16 @@ const Cards:React.FC<cardsProp> = ({data}) => {
         return population.toString()
     }
 
+ 
+    
   return (
-    <section  className={`mx-auto grid gap-6 p-4 sm:p-6  grid-cols-1 
-        sm:grid-cols-2 md:grid-cols-3 transition-all duration-300 ${modalOpen ? "lg:grid-cols-3 max-w-[900px]" : "lg:grid-cols-4 max-w-[1200px]"} `}>
+    <section   className="mx-auto p-4 sm:p-6 gap-6 grid transition-all duration-300"
+  style={{
+    maxWidth: modalOpen
+      ? 'clamp(0px, calc(100% - 20rem), 1200px)'
+      : '1200px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+  }}>
         {data?.map((card, ind) => (
             <div
             key={ind}
