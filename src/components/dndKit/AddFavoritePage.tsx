@@ -1,7 +1,9 @@
 
+import usegetfavorit from '../../hooks/usegetfavorit'
 import usePostFaworite from '../../hooks/usePostFaworite'
-import type { CountryType } from '../../Pages/ExplorePlaces/Interface'
-import { Card_icon_1, Card_icon_2 } from '../../Pages/HomePage/Icons'
+import useDelete from '../../hooks/uzeDelete'
+import type { CountryType, fatchData } from '../../Pages/ExplorePlaces/Interface'
+import { Card_icon_1, Card_icon_2, Deelicon_1 } from '../../Pages/HomePage/Icons'
 import { useTripStore } from '../../ZustandStore/CurrentTripList.store'
 
 interface prop {
@@ -17,20 +19,49 @@ const AddFavoritePage:React.FC<prop> = ({data}) => {
   const metodpost =(e:React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
   mutate(data)
-  alert("sucsess")
+  
   }
 
   const handleAddToTrip = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       addCountry(data);
     };
+  const {data:fdata} =usegetfavorit("FavoriteResource")
+  const infodata:fatchData[] =  fdata?.map(item => ({...item.data, id:item.id})) ?? []
+  const favorites = infodata?.some(f => 
+    f.name.common === data.name.common
+  ) 
 
 
+
+ const {mutate:deletefn} = useDelete("FavoriteResource")
+
+ const deletefavorite = (e: React.MouseEvent<HTMLButtonElement>,name:string) => {
+e.stopPropagation()
+const cenceldata =infodata.find(n => 
+  n.name.common === name
+)
+
+
+if(cenceldata) 
+ deletefn(cenceldata?.id)
+ }
+
+ 
   return (
             <div className='absolute flex items-center gap-2  top-3 right-3'>
-        <button onClick={ metodpost} className='cursor-pointer'>
-          <Card_icon_1/>
-        </button>
+              {
+              favorites ? (
+                <button onClick={(e) => deletefavorite(e, data.name.common)} className='cursor-pointer'>
+                <Deelicon_1/>
+              </button>
+              ): (
+                <button onClick={ metodpost} className='cursor-pointer'>
+                  <Card_icon_1/>
+                </button>
+              )
+              }
+        
 
 
         <button onClick={handleAddToTrip} className='cursor-pointer'>
@@ -45,3 +76,4 @@ const AddFavoritePage:React.FC<prop> = ({data}) => {
 }
 
 export default AddFavoritePage
+
