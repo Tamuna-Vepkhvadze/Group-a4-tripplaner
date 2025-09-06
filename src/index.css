@@ -4,3 +4,22 @@
   box-sizing: border-box;
 
 }
+
+/* src/components/Cards.css ან src/App.css */
+.dimmed {
+  opacity: 0.6; /* ჩაბნელება */
+  transition: opacity 0.3s ease; /* გლუვი ეფექტი */
+}
+
+.bg-white {
+  transition: transform 0.2s ease; /* scale ეფექტი */
+}
+
+.bg-white[draggable="true"]:hover {
+  transform: scale(1.02); /* მცირე გადიდება hover-ზე */
+}
+
+.dragover {
+  background-color: #e0e0e0;
+  border: 2px dashed #666; /* საიდბარის drop ეფექტი */
+}
