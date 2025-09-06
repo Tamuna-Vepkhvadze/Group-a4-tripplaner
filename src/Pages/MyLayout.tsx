@@ -17,6 +17,7 @@ const MyLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
   
+  
   //function to open modal
     const openPop_up = ()=> {
      if(location.pathname==='/ExplorePlaces'){
@@ -25,6 +26,7 @@ const MyLayout = () => {
       navigate('/ExplorePlaces')
      }
     }
+    
 
   //function to close modal
   const closePop_up = () => {

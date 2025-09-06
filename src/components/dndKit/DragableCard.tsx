@@ -7,9 +7,14 @@ import AddFavoritePage from './AddFavoritePage'
 
 
 interface DraggableCardProps {
-    card: CountryType
+    card: CountryType,
+    modalOpen: boolean;
+    onClick: (card: CountryType) => void;
+    formatPopulation: (population: number) => string;
 }
-const DragableCard:React.FC<DraggableCardProps> = ({card}) => {
+
+
+const DragableCard:React.FC<DraggableCardProps> = ({card, modalOpen,onClick,formatPopulation}) => {
 
      const{attributes, listeners, setNodeRef, transform} = useDraggable({
         id:card.name.common //unique identifier for DnD
@@ -24,27 +29,27 @@ const style = {
 };
 
 
-const formatPopulation = (population: number) :string=> {
-    if(population >= 1000000) {
-        return (population / 1000000).toFixed(1) + "M"
-    } else if (population >= 1000) {
-        return (population / 1000).toFixed(1) + "K"
-    }
-    return population.toString()
-}
-
-
 
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-        <div className="w-full aspect-[4/3] max-h-40 relative">
-      
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className={`overflow-hidden bg-white rounded-lg shadow-md flex flex-col cursor-pointer transform transition-all duration-300 ${
+        modalOpen ? 'scale-95 max-h-[12rem]' : 'scale-100 max-h-[40rem]'
+      }`}
+      onClick={() => onClick(card)}
+    >
+      <div className={`w-full relative ${modalOpen ? 'max-h-24' : 'max-h-40'} aspect-[4/3]`}>
+        <AddFavoritePage data={card} />
         <img src={card.flags.png} alt="Country_Flags" className="w-full h-full object-cover" />
       </div>
       <div className="h-1/2 p-4 flex flex-col justify-between">
         <h2 className="text-lg font-semibold">{card.name.common}</h2>
         <p className="text-gray-600 flex items-center gap-2">
-          <Ardlocation /> {card.continents[0]}
+          <Ardlocation />
+          {card.continents[0]}
         </p>
         <p className="text-gray-700 flex items-center gap-2">
           <Capital /> Capital: {card.capital?.[0]}
