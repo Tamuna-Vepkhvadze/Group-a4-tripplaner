@@ -1,16 +1,22 @@
-import { useMutation } from "@tanstack/react-query"
-import senCards from "../services/reactquerys/mutation/sendCards"
-import type { sentDataType } from "../Pages/ExplorePlaces/Interface"
+import { useMutation } from "@tanstack/react-query";
+import sendCards from "../services/reactquerys/mutation/sendCards"; 
+import type { sentDataType } from "../Pages/ExplorePlaces/Interface"; 
+import { client } from "../services/reactquerys";
 
-const usesentcerd = (resource: string) => {
+
+const useSentCard = (resource: string) => {
   const result = useMutation({
-    mutationFn: (data: sentDataType) => senCards(resource, data),
-    onError: (error) => console.log(error),
+    mutationFn: (data: sentDataType) => sendCards(resource, data),
+    onError: (error) => {
+      console.error('Mutation error:', error); 
+    },
     onSuccess: () => {
-        console.log("success")
-       
+      console.log("success"); 
+      client.invalidateQueries({queryKey:["favoritecountrygroup"]})
+     
     }
-  })
-  return result
-}
-export default usesentcerd
+  });
+  return result;
+};
+
+export default useSentCard;

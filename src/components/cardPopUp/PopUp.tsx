@@ -13,7 +13,7 @@ const PopUp: React.FC<PopupProps> = ({ isOpen, onClose, children ,country}) => {
 
   return (
    <div className="fixed inset-0 flex items-center justify-center bg-black/20  z-50" onClick={onClose}>
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={(e)=>e.stopPropagation()}>
+      <div className="w-full z-40 max-w-2xl bg-white rounded-2xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={(e)=>e.stopPropagation()}>
         
         {/* Header with flag, names, and close button  */}
         <div className="relative w-full h-48" rounded-t-2xl overflow-hidden>

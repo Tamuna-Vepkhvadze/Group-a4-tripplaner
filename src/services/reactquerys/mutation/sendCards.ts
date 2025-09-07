@@ -1,11 +1,19 @@
-import type {  sentDataType } from "../../../Pages/ExplorePlaces/Interface"
-import { serwercall } from "../../axios/Axioswrapper"
-   
+import type { sentDataType } from "../../../Pages/ExplorePlaces/Interface";
+import { serwercall } from "../../axios/Axioswrapper";
+;
 
-const senCards =async(resource:string, senddata:sentDataType) => {
- const responce = await serwercall.post(`resource/${resource}`, {data:[senddata]})
+const sendCards = async (resource: string, senddata: sentDataType) => {
+  try {
+    const response = await serwercall.post(`resource/${resource}`, { data: [senddata] });
+  
+    if (!response.status.toString().startsWith('2')) {
+      throw new Error('Failed to send cards');
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error in sendCards:', error);
+    throw error; 
+  }
+};
 
- return responce.data
-}
-
-export default senCards
+export default sendCards;

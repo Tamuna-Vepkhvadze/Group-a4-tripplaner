@@ -38,22 +38,14 @@ const Cards: React.FC<CardsProp> = ({ data }) => {
 
   return (
     <section
-      className={`mx-auto p-4 sm:p-6 gap-6 grid transition-all duration-300 ${
-        isDragging ? 'dimmed' : ''
-      }`}
-      style={{
-        maxWidth: modalOpen
-          ? 'clamp(0px, calc(100% - 20rem), 1200px)'
-          : '1200px',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      }}
+     className={`max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 ${
+        modalOpen ? 'w-[800px] ml-7 lg:grid-cols-3' : 'lg:grid-cols-4'
+      } gap-6 p-4`}
     >
       {data?.map((card, ind) => (
         <div
           key={ind}
-          className={`overflow-hidden bg-white rounded-lg shadow-md flex flex-col cursor-pointer transform transition-all duration-300 ${
-            modalOpen ? 'scale-95 max-h-[12rem]' : 'scale-100 max-h-[40rem]'
-          }`}
+          className={`overflow-hidden bg-white rounded-lg shadow-md flex flex-col cursor-pointer transform transition-all duration-300  `}
           draggable // Make card draggable
           onDragStart={(e) => handleDragStart(e, card)}
           onDragEnd={handleDragEnd}
