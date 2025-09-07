@@ -70,3 +70,4 @@ closePop_up()
 };
 
 export default MyLayout;
+

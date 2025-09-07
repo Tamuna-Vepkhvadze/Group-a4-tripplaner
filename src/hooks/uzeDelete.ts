@@ -9,6 +9,7 @@ const useDelete = (resource: string ) => {
     onSuccess: () => {
         console.log("onSuccess")
         client.invalidateQueries({ queryKey:["fivorite"]  })
+        client.invalidateQueries({ queryKey:["favoritecountrygroup"]  })
     }
   })
   return result

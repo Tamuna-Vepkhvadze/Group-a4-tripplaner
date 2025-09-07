@@ -64,6 +64,7 @@ const CurrentTrip:React.FC = () => {
                     Save Trip
                 </button>
       )
+      
     }
              
 

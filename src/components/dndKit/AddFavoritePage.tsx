@@ -5,12 +5,15 @@ import useDelete from '../../hooks/uzeDelete'
 import type { CountryType, fatchData } from '../../Pages/ExplorePlaces/Interface'
 import { Card_icon_1, Card_icon_2, Deelicon_1 } from '../../Pages/HomePage/Icons'
 import { useTripStore } from '../../ZustandStore/CurrentTripList.store'
+import { useSidebarStore } from '../../ZustandStore/SideBar.store'
 
 interface prop {
   data:CountryType
 }
 
-const AddFavoritePage:React.FC<prop> = ({data}) => {
+  const AddFavoritePage:React.FC<prop> = ({data}) => {
+   const modalOpen = useSidebarStore((state) => state.modalOpen);
+  
 
   const {mutate} = usePostFaworite("FavoriteResource")
   const { addCountry } = useTripStore();
@@ -63,10 +66,13 @@ if(cenceldata)
               }
         
 
-
-        <button onClick={handleAddToTrip} className='cursor-pointer'>
-          <Card_icon_2/>
-        </button>
+        {
+        modalOpen ? null : <button onClick={handleAddToTrip} className='cursor-pointer'>
+                            <Card_icon_2/>
+                          </button>
+                          
+        }
+       
 
               
           
@@ -76,4 +82,5 @@ if(cenceldata)
 }
 
 export default AddFavoritePage
+
 
