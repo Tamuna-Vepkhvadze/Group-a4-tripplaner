@@ -69,3 +69,4 @@ const Side_Bar: React.FC<SideBarProps> = ({ isOpen, onClick }) => {
 };
 
 export default Side_Bar;
+
