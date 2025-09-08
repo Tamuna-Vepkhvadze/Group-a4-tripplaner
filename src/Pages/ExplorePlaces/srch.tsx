@@ -4,6 +4,7 @@ import { Filter, Heart, SerchBar } from '../HomePage/Icons'
 import type { CountryType } from './Interface'
 import Cards from './cards'
 import { Link } from 'react-router-dom'
+import { useSidebarStore } from '../../ZustandStore/SideBar.store'
 
 interface serchProp {
     data:CountryType[] | undefined
@@ -23,6 +24,7 @@ const filterData = data?.filter(name =>{
   
     
 })
+const {modalOpen} = useSidebarStore()
 
   return (
     
@@ -67,6 +69,7 @@ const filterData = data?.filter(name =>{
          </div>
                 <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center  pl-4 pb-4 text-gray-500">
                      Showing {filterData?.length || 0} of {data?.length || 0} countries
+                     {modalOpen &&  <p className='text-blue-500 ml-2.5 font-bold'>. Drag Countrys to the trip planner to add team</p>}
                 </div>
       </div>
 

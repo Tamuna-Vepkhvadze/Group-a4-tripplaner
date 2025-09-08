@@ -2,6 +2,7 @@
 import useDelete from "../../hooks/uzeDelete";
 import type { countryrowdata, DataType } from "../../Pages/ExplorePlaces/Interface";
 import { BasketIcon } from "../../Pages/HomePage/Icons";
+import { useTripStore } from "../../ZustandStore/CurrentTripList.store";
 
 interface MyPlanType {
   Data: countryrowdata[] | undefined;
@@ -24,6 +25,8 @@ const FavoriteCountryPage: React.FC<MyPlanType> = ({ Data }) => {
         cardsname: item.data?.cardsname ?? "Unknown", 
         cardData: item.data?.cardData ?? [], 
       })) ?? [];
+
+      const {addCountry} = useTripStore()
 
   return (
     <section className="space-y-4">
@@ -64,7 +67,7 @@ const FavoriteCountryPage: React.FC<MyPlanType> = ({ Data }) => {
           </span>
         )}
       </div>
-      <button className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+      <button onClick={() =>{item.cardData.map((card) => addCountry(card))}} className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
             Load Trip
           </button>
         </div>
@@ -79,6 +82,7 @@ const FavoriteCountryPage: React.FC<MyPlanType> = ({ Data }) => {
 };
 
 export default FavoriteCountryPage;
+
 
 
 

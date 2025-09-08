@@ -1,9 +1,10 @@
 
+import { toast } from 'react-toastify'
 import usegetfavorit from '../../hooks/usegetfavorit'
 import usePostFaworite from '../../hooks/usePostFaworite'
 import useDelete from '../../hooks/uzeDelete'
 import type { CountryType, fatchData } from '../../Pages/ExplorePlaces/Interface'
-import { Card_icon_1, Card_icon_2, Deelicon_1 } from '../../Pages/HomePage/Icons'
+import { Card_icon_1, Card_icon_2, Deelicon_1, InsideHeart } from '../../Pages/HomePage/Icons'
 import { useTripStore } from '../../ZustandStore/CurrentTripList.store'
 import { useSidebarStore } from '../../ZustandStore/SideBar.store'
 
@@ -16,7 +17,7 @@ interface prop {
   
 
   const {mutate} = usePostFaworite("FavoriteResource")
-  const { addCountry } = useTripStore();
+  const { addCountry,tripCountries } = useTripStore();
 
 
   const metodpost =(e:React.MouseEvent<HTMLButtonElement>) => {
@@ -25,16 +26,23 @@ interface prop {
   
   }
 
-  const handleAddToTrip = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
-      addCountry(data);
-    };
+  
   const {data:fdata} =usegetfavorit("FavoriteResource")
   const infodata:fatchData[] =  fdata?.map(item => ({...item.data, id:item.id})) ?? []
   const favorites = infodata?.some(f => 
     f.name.common === data.name.common
   ) 
-
+const handleAddToTrip = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      
+      const validCard = tripCountries.some(item => item.name.common === data.name.common)
+    if(validCard) {
+        return toast.info("Country already added ")
+    } else {
+       addCountry(data);
+        toast.success(" Country added")
+    }
+    };
 
 
  const {mutate:deletefn} = useDelete("FavoriteResource")
@@ -56,7 +64,7 @@ if(cenceldata)
               {
               favorites ? (
                 <button onClick={(e) => deletefavorite(e, data.name.common)} className='cursor-pointer'>
-                <Deelicon_1/>
+                <InsideHeart/>
               </button>
               ): (
                 <button onClick={ metodpost} className='cursor-pointer'>

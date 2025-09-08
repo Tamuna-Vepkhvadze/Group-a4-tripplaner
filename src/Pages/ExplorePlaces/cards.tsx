@@ -11,20 +11,20 @@ interface CardsProp {
 
 const Cards: React.FC<CardsProp> = ({ data }) => {
   const [selectedCard, setSelectedCard] = useState<CountryType | null>(null);
-  const [isDragging, setIsDragging] = useState(false); // State for drag tracking
+  const [isDragging, setIsDragging] = useState(false); // აღებულია თუ არა
   const modalOpen = useSidebarStore((state) => state.modalOpen);
 
-  // Drag start handler
+  // მოძრაობის დაწყება
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, card: CountryType) => {
     e.dataTransfer.setData('application/json', JSON.stringify(card));
     const dragElement = e.currentTarget;
-    e.dataTransfer.setDragImage(dragElement, 0, 0); // Card follows the mouse
-    setIsDragging(true); // Dim the section
+    e.dataTransfer.setDragImage(dragElement, 0, 0); // ქარდი მოყვება თუ არა მაუსს
+    setIsDragging(true); //
   };
 
-  // Drag end handler
+  // დასრულება გადაადგილების
   const handleDragEnd = () => {
-    setIsDragging(false); // Remove dimming
+    setIsDragging(false);
   };
 
   const formatPopulation = (population: number): string => {
@@ -46,7 +46,7 @@ const Cards: React.FC<CardsProp> = ({ data }) => {
         <div
           key={ind}
           className={`overflow-hidden bg-white rounded-lg shadow-md flex flex-col cursor-pointer transform transition-all duration-300  `}
-          draggable // Make card draggable
+          draggable // ქარდი ხდება draggable
           onDragStart={(e) => handleDragStart(e, card)}
           onDragEnd={handleDragEnd}
           onClick={() => setSelectedCard(card)}
